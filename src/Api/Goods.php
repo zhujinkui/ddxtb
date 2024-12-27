@@ -59,6 +59,26 @@ class Goods extends TbGateWay
     }
 
     /**
+     * 商品搜索
+     *
+     * @param array $client_params
+     *
+     * @return bool|mixed|string
+     */
+    public function queryGoodsSearch(array $client_params = [])
+    {
+        $params = [
+            'apikey' => $this->apikey,
+        ];
+
+        if (!empty($client_params)) {
+            $params = array_merge($params, $client_params);
+        }
+
+        return $this->send('/tbk/super_search_material', $params, "POST");
+    }
+
+    /**
      * 转链
      *
      * @param array $client_params
@@ -69,6 +89,7 @@ class Goods extends TbGateWay
     {
         $params = [
             'apikey' => $this->apikey,
+            'pid'    => $this->pid,
         ];
 
         if (!empty($client_params)) {
@@ -76,5 +97,51 @@ class Goods extends TbGateWay
         }
 
         return $this->send('/tbk/tc_general_convert', $params, "POST");
+    }
+
+    /**
+     * 生成CODE
+     *
+     * @param array $client_params
+     *
+     * @return bool|mixed|string
+     */
+    public function privilegeInvitecode(array $client_params = [])
+    {
+        $params = [
+            'apikey'       => $this->apikey,
+            'relation_app' => "common",
+            'code_type'    => 1,
+        ];
+
+        if (!empty($client_params)) {
+            $params = array_merge($params, $client_params);
+        }
+
+        return $this->send('/tbk/invitecode_get', $params, "POST");
+    }
+
+    /**
+     * 渠道ID
+     *
+     * @param array $client_params
+     *
+     * @return bool|mixed|string
+     */
+    public function privilegeInvitecodePublisher(array $client_params = [])
+    {
+        $params = [
+            'apikey'       => $this->apikey,
+            'inviter_code' => "6ZQB79",
+            'info_type'    => 1,
+            'app_key'      => $this->appkey,
+            'app_secret'   => $this->appsecret,
+        ];
+
+        if (!empty($client_params)) {
+            $params = array_merge($params, $client_params);
+        }
+
+        return $this->send('/tbk/publisher_save', $params, "POST");
     }
 }

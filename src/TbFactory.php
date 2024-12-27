@@ -43,7 +43,7 @@ class TbFactory
             $classname = __NAMESPACE__ . "\\Api\\" . ucfirst($api);
 
             if (!class_exists($classname)) {
-                throw new Exception('Pdd Sdk Api Undefined');
+                throw new Exception('Taobao Sdk Api Undefined');
 
                 return false;
             }

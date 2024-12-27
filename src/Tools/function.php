@@ -45,4 +45,21 @@ if (!function_exists('validate_time_format')) {
     }
 }
 
+if (!function_exists('u2c')) {
+    /**
+     * 中文转汉字
+     *
+     * @param $str
+     *
+     * @return array|string|string[]|null
+     */
+    function u2c($str)
+    {
+        return preg_replace_callback("#\\\u([0-9a-f]{4})#i", function ($r) {
+            return iconv('UCS-2BE', 'UTF-8', pack('H4', $r[1]));
+        }, $str);
+    }
+}
+
+
 

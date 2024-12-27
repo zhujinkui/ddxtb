@@ -35,15 +35,16 @@ class TbGateWay
     protected mixed $apikey;
     protected mixed $appkey;
     protected mixed $appsecret;
+    protected mixed $pid;
 
     protected TbFactory $tb_factory;
-
 
     public function __construct(array $config, TbFactory $TbFactory)
     {
         $this->apikey     = $config['apikey'];
-        $this->appkey     = $config['appkey'];
-        $this->appsecret  = $config['appsecret'];
+        $this->pid        = $config['pid'];
+        $this->appkey     = $config['app_key'];
+        $this->appsecret  = $config['app_secret'];
         $this->tb_factory = $TbFactory;
     }
 
